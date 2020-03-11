@@ -12,7 +12,7 @@ export default (req) => {
 
         //todo: readjust url according to project
         baseURL: "https://react-ssr-api.herokuapp.com",
-        headers: { cookie: req.get("cookie" || "")}
+        headers: { cookie: req.get("cookie" || " ")}
     });
     return createStore(reducers, {}, applyMiddleware(thunk.withExtraArgument(axiosInstance)));
 };
