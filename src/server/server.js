@@ -52,8 +52,6 @@ app.get("*", (req, res) => {
 
             res.send(content);
         });
-
-
 });
 
 app.listen(PORT, () => {
