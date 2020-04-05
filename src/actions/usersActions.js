@@ -25,6 +25,5 @@ export const fetchUsers = () => {
                      error: err
                  })
              })
-
      }
 };

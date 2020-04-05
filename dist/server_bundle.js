@@ -274,13 +274,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // const App = ({route}) => {
-//     return (
-//         <div>
-//             {renderRoutes(route.routes)}
-//         </div>
-//     )
-// };
+
 
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
@@ -312,10 +306,9 @@ var mapStateToProps = function mapStateToProps() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  component: Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(App) // loadData: () => {
-  //     //todo: get current user here
-  // }
-
+  component: Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(App),
+  loadData: function loadData(store) {//todo: get current user here
+  }
 });
 
 /***/ }),
@@ -378,7 +371,7 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "home"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Homfdgfgfxvxvxvxv"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.clicked
       }, "click me"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/users"
@@ -476,8 +469,9 @@ var UsersListPage = /*#__PURE__*/function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(UsersListPage)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "renderUsers", function () {
+      //users' reducer initial state
       var users = _this.props.users;
-      return users.map(function (user) {
+      return users.users.map(function (user) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: user.id
         }, user.name);
@@ -490,7 +484,15 @@ var UsersListPage = /*#__PURE__*/function (_Component) {
   _createClass(UsersListPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.dispatch(Object(_actions_usersActions__WEBPACK_IMPORTED_MODULE_2__["fetchUsers"])());
+      //avoid fetching users second time on client if they've already been fetch
+      //on the server (users will already be fetched on the server on page reload on '/users')
+      var _this$props$users = this.props.users,
+          isFinishedFetchingUsers = _this$props$users.isFinishedFetchingUsers,
+          areUsersFetched = _this$props$users.areUsersFetched;
+
+      if (!isFinishedFetchingUsers && !areUsersFetched) {
+        this.props.dispatch(Object(_actions_usersActions__WEBPACK_IMPORTED_MODULE_2__["fetchUsers"])());
+      }
     }
   }, {
     key: "render",
@@ -506,7 +508,8 @@ var UsersListPage = /*#__PURE__*/function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   // console.log({state});
   return {
-    users: state.users.users
+    state: state,
+    users: state.users
   };
 };
 
@@ -591,7 +594,7 @@ __webpack_require__.r(__webpack_exports__);
     location: req.path,
     context: context
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(react_router_config__WEBPACK_IMPORTED_MODULE_4__["renderRoutes"])(_Routes__WEBPACK_IMPORTED_MODULE_6__["default"])))));
-  var html = "\n    <html>\n    <body>\n        <head>\n            <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\"/>\n        </head>\n        <div id=\"root\">".concat(content, "</div>\n        <script>\n            window.INITIAL_STATE = ").concat(serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState()), "\n        </script>\n        <script src=\"client_bundle.js\"></script>\n    </body>\n    </html>\n    ");
+  var html = "\n    <html>\n    <body>\n        <head>\n            <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\"/>\n        </head>\n        <div id=\"root\">".concat(content, "</div>\n        <script>\n            window.INITIAL_STATE = ").concat(serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState()), "\n        </script>\n        <script src=\"client_bundle.js\"></script>\n        <script src=\"{process.env.BROWSER_REFRESH_URL}\"></script>\n    </body>\n    </html>\n    ");
   return html;
 });
 

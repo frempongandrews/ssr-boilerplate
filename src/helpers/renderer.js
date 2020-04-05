@@ -29,6 +29,7 @@ export default (req, store, context) => {
             window.INITIAL_STATE = ${ serialize(store.getState()) }
         </script>
         <script src="client_bundle.js"></script>
+        <script src="{process.env.BROWSER_REFRESH_URL}"></script>
     </body>
     </html>
     `;

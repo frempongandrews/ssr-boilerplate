@@ -18,7 +18,7 @@ const clientConfig = {
         path: path.resolve(__dirname, "public")
     },
     optimization: {
-        // minimizer: [new UglifyJsPlugin()],
+        minimizer: [new UglifyJsPlugin()],
     },
 
 };

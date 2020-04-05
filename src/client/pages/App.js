@@ -2,13 +2,6 @@ import React, {Component} from "react";
 import { renderRoutes } from "react-router-config";
 import { connect } from "react-redux";
 import {fetchCurrentUser} from "../../actions/authActions";
-// const App = ({route}) => {
-//     return (
-//         <div>
-//             {renderRoutes(route.routes)}
-//         </div>
-//     )
-// };
 
 class App extends Component {
     componentDidMount() {
@@ -34,7 +27,7 @@ const mapStateToProps = () => {
 
 export default {
     component: connect(mapStateToProps)(App),
-    // loadData: () => {
-    //     //todo: get current user here
-    // }
+    loadData: (store) => {
+        //todo: get current user here
+    }
 }

@@ -5,13 +5,18 @@ import { fetchUsers } from "../../actions/usersActions";
 class UsersListPage extends Component {
 
     componentDidMount() {
-        this.props.dispatch(fetchUsers());
-
+        //avoid fetching users second time on client if they've already been fetch
+        //on the server (users will already be fetched on the server on page reload on '/users')
+        const { isFinishedFetchingUsers, areUsersFetched } = this.props.users;
+        if ( !isFinishedFetchingUsers && !areUsersFetched ) {
+            this.props.dispatch(fetchUsers());
+        }
     }
 
     renderUsers = () => {
+        //users' reducer initial state
         const { users } = this.props;
-        return users.map(user => {
+        return users.users.map(user => {
             return (
                 <li key={user.id}>{user.name}</li>
             )
@@ -37,7 +42,8 @@ class UsersListPage extends Component {
 const mapStateToProps = (state) => {
     // console.log({state});
     return {
-        users: state.users.users,
+        state: state,
+        users: state.users,
 
     }
 };
