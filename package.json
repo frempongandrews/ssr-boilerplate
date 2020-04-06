@@ -63,7 +63,6 @@
     "react-transition-group": "^4.2.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "reload": "^3.0.4",
     "rimraf": "^3.0.0",
     "sass-loader": "^7.1.0",
     "serialize-javascript": "^2.1.0",

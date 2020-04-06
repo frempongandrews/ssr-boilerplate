@@ -11,7 +11,7 @@ class HomePage extends React.Component {
     render () {
         return (
             <div id="home">
-                <h1>Homfdgfgfxvxvxvxv</h1>
+                <h1>Home</h1>
                 <button onClick={this.clicked}>click me</button>
                 <div><Link to={`/users`}>Users</Link></div>
             </div>

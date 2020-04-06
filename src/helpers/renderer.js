@@ -29,7 +29,7 @@ export default (req, store, context) => {
             window.INITIAL_STATE = ${ serialize(store.getState()) }
         </script>
         <script src="client_bundle.js"></script>
-        <script src="{process.env.BROWSER_REFRESH_URL}"></script>
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
     </body>
     </html>
     `;
