@@ -9,7 +9,7 @@ export const fetchCurrentUser =  () => {
         });
         return api.get("/current_user")
             .then(res => {
-                console.log("************* FETCH_CURRENT_USER", res);
+                console.log("************* FETCH_CURRENT_USER", res.data);
                 dispatch({
                     type: FETCH_CURRENT_USER_SUCCESS,
                     user: res.data

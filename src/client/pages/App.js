@@ -6,11 +6,20 @@ import Header from "../components/Header";
 
 class App extends Component {
     componentDidMount() {
-        this.props.dispatch(fetchCurrentUser());
+        //avoid fetching current user second time on client if it has already been fetch
+        //on the server (current user will already be fetched on the server on any page reload)
+        if (!this.props.auth.isFinishedFetchingCurrentUser) {
+            this.props.dispatch(fetchCurrentUser());
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        //todo: check auth on route change
     }
 
     render() {
-        const { route } = this.props;
+        const { route, state } = this.props;
+        console.log("*********************State from App => ", state);
         return (
             <div>
                 <Header />
@@ -20,15 +29,16 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-
+        state,
+        auth: state.auth
     }
 };
 
 export default {
     component: connect(mapStateToProps)(App),
     loadData: (store) => {
-        //todo: get current user here
+        return store.dispatch(fetchCurrentUser());
     }
 }
