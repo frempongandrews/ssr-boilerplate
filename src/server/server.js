@@ -14,6 +14,7 @@ const PORT = 3000;
 //todo: change api endpoint depending on project
 app.use("/api", proxy(`http://react-ssr-api.herokuapp.com`, {
     proxyReqOptDecorator: (opts) => {
+        //todo: setting origin of requests(will change depending on project)
         opts.headers["x-forwarded-host"] = "localhost:3000";
         return opts;
     }
