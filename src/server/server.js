@@ -11,15 +11,15 @@ const app = express();
 const PORT = 3000;
 
 
-app.use(express.static("public"));
-
 //todo: change api endpoint depending on project
-app.use("/api", proxy(`https://react-ssr-api.herokuapp.com`, {
+app.use("/api", proxy(`http://react-ssr-api.herokuapp.com`, {
     proxyReqOptDecorator: (opts) => {
         opts.headers["x-forwarded-host"] = "localhost:3000";
-        return opts
+        return opts;
     }
 }));
+
+app.use(express.static("public"));
 
 app.get("*", (req, res) => {
 

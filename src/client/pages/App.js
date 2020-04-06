@@ -2,17 +2,18 @@ import React, {Component} from "react";
 import { renderRoutes } from "react-router-config";
 import { connect } from "react-redux";
 import {fetchCurrentUser} from "../../actions/authActions";
+import Header from "../components/Header";
 
 class App extends Component {
     componentDidMount() {
-        this.props.dispatch(fetchCurrentUser())
+        this.props.dispatch(fetchCurrentUser());
     }
 
     render() {
         const { route } = this.props;
         return (
             <div>
-                <h1>Header</h1>
+                <Header />
                {renderRoutes(route.routes)}
             </div>
         )
