@@ -47,6 +47,14 @@ app.get("*", (req, res) => {
 
             const content = renderer(req, store, context);
 
+            // console.log({context});
+
+            // when Redirect component is rendered, the context object gets 2 new keys: the location
+            // and url
+            if (context.url) {
+                return res.redirect(301, context.url);
+            }
+
             if (context.notFound) {
                 res.status(404);
             }

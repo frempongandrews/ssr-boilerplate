@@ -20,7 +20,8 @@ export default [
                 path: "/users",
             },
             {
-                ...AdminsListPage
+                ...AdminsListPage,
+                path: "/admins"
             },
             {
                 ...NotFound
