@@ -1,6 +1,7 @@
 import React from "react";
 
 const NotFound = ({ staticContext = {} }) => {
+    //context is received by al;l components as staticContext
     staticContext.notFound = true;
     return (
         <div>
