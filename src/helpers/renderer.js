@@ -1,5 +1,6 @@
 import React from "react";
 import  { renderToString } from "react-dom/server";
+import { Helmet }  from "react-helmet";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
@@ -18,10 +19,16 @@ export default (req, store, context) => {
 
     );
 
+    const helmet = Helmet.renderStatic();
+
     const html = `
     <html>
     <body>
         <head>
+            ${helmet.title.toString()}
+            <!-- all open graph meta tags and other meta tags will be extrapolated here-->
+            ${helmet.meta.toString()}
+           
             <link rel="stylesheet" type="text/css" href="styles.css"/>
         </head>
         <div id="root">${content}</div>

@@ -19,7 +19,7 @@ class App extends Component {
 
     render() {
         const { route, state } = this.props;
-        console.log("*********************State from App => ", state);
+        // console.log("*********************State from App => ", state);
         return (
             <div>
                 <Header />

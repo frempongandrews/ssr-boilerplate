@@ -13,6 +13,7 @@ class AdminsListPage extends Component {
         if ( !isFinishedFetchingAdmins && !areAdminsFetched ) {
             this.props.dispatch(fetchAdmins());
         }
+        // this.props.dispatch(fetchAdmins());
     }
 
     renderAdmins = () => {

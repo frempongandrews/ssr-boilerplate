@@ -9,6 +9,7 @@ export const fetchAdmins = () => {
         });
         return api.get("/admins")
             .then(res => {
+                console.log("*********Admins", res);
                 dispatch({
                     type: FETCH_ADMINS_SUCCESS,
                     admins: res.data
